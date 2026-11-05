@@ -1,0 +1,203 @@
+{
+ "format": "rammaps/1",
+ "game": "Golden Sun",
+ "system": "gba",
+ "rom": {
+  "sha1": [
+   "5c4695205413df7db52b9a184815a07783999971"
+  ],
+  "header_code": "AGSE"
+ },
+ "memory_regions": [
+  {
+   "name": "ewram",
+   "start": "0x02000000",
+   "size": "0x40000"
+  },
+  {
+   "name": "iwram",
+   "start": "0x03000000",
+   "size": "0x8000"
+  },
+  {
+   "name": "io",
+   "start": "0x04000000",
+   "size": "0x400"
+  },
+  {
+   "name": "oam",
+   "start": "0x07000000",
+   "size": "0x400"
+  }
+ ],
+ "pointers": {
+  "battle_work": "0x03001E74",
+  "ui_render": "0x03001E8C",
+  "event_work": "0x03001EBC",
+  "map_work": "0x03001E70",
+  "player_ptr": "0x03001E64"
+ },
+ "values": {
+  "coins": {
+   "type": "u32",
+   "at": "0x02000250"
+  },
+  "party_flags": {
+   "type": "u8",
+   "at": "0x02000040"
+  },
+  "story_flags_0x20_0x27": {
+   "type": "u8",
+   "at": "0x02000044"
+  },
+  "scene": {
+   "type": "s16",
+   "at": "0x02000400"
+  },
+  "encounter_steps": {
+   "type": "s32",
+   "at": "0x02000478"
+  },
+  "encounter_threshold": {
+   "type": "u32",
+   "at": {
+    "ptr": "event_work",
+    "off": "0x1AC"
+   }
+  },
+  "encounter_groups": {
+   "type": "u8",
+   "at": {
+    "ptr": "event_work",
+    "off": "0x1A0"
+   },
+   "count": 8
+  },
+  "encounter_bias": {
+   "type": "s32",
+   "at": {
+    "ptr": "event_work",
+    "off": "0x1A8"
+   }
+  },
+  "encounter_group": {
+   "type": "s16",
+   "at": "0x02000402"
+  },
+  "battle_request": {
+   "type": "s16",
+   "at": {
+    "ptr": "event_work",
+    "off": "0x17C"
+   }
+  },
+  "enemy_group": {
+   "type": "s32",
+   "at": {
+    "ptr": "battle_work",
+    "off": "0x0"
+   }
+  },
+  "rng_field": {
+   "type": "u32",
+   "at": "0x03001CB4"
+  }
+ },
+ "structs": {
+  "unit": {
+   "size": "0x14C",
+   "fields": {
+    "name": {
+     "type": "str",
+     "off": "0x00",
+     "len": 15
+    },
+    "level": {
+     "type": "u8",
+     "off": "0x0F"
+    },
+    "hp_max": {
+     "type": "u16",
+     "off": "0x34"
+    },
+    "pp_max": {
+     "type": "u16",
+     "off": "0x36"
+    },
+    "hp": {
+     "type": "u16",
+     "off": "0x38"
+    },
+    "pp": {
+     "type": "u16",
+     "off": "0x3A"
+    },
+    "exp": {
+     "type": "u32",
+     "off": "0x124"
+    },
+    "elements": {
+     "type": "s16",
+     "off": "0x48",
+     "count": 8
+    },
+    "class": {
+     "type": "u8",
+     "off": "0x128"
+    }
+   }
+  }
+ },
+ "entities": {
+  "party": {
+   "struct": "unit",
+   "at": "0x02000500",
+   "count": 8
+  },
+  "enemies": {
+   "struct": "unit",
+   "at": {
+    "ptr": "battle_work",
+    "off": "0x82C"
+   },
+   "count": 6
+  }
+ },
+ "flags": {
+  "base": "0x02000040",
+  "bits": 4096
+ },
+ "rom_tables": {
+  "zones": {
+   "addr": "0x9C610",
+   "count": 100,
+   "stride": 28
+  },
+  "items": {
+   "table": "0x7B6A8",
+   "stride": 44,
+   "count": 269
+  }
+ },
+ "sources": {
+  "method": "Addresses were located or checked by the maintainers with emulator RAM captures, perturbation tests and reading the game's own code on a legitimately owned ROM.",
+  "acknowledgements": [
+   {
+    "name": "PascalPixel/alchemy, Coaltergeist/goldensun-decomp, kaptanultros/GoldenSun_GSTLA_StatDisplay",
+    "use": "some offsets were first suggested by these projects and then re-verified on our own captures; none of their tables, text or code were copied",
+    "urls": [
+     "https://github.com/PascalPixel/alchemy",
+     "https://github.com/Coaltergeist/goldensun-decomp",
+     "https://github.com/kaptanultros/GoldenSun_GSTLA_StatDisplay"
+    ]
+   },
+   {
+    "name": "Golden Sun Universe wiki (CC BY-SA 4.0), Zombie page",
+    "use": "cross-check of element resistances only; no content copied",
+    "urls": [
+     "https://goldensunwiki.net/wiki/Zombie"
+    ]
+   }
+  ]
+ }
+}

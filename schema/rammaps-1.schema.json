@@ -1,0 +1,160 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "rammaps/1",
+ "description": "A RAM/ROM address map. Addresses, offsets, sizes and field names only. scripts/validate.py enforces additional rules (cross references, struct bounds, content rules).",
+ "type": "object",
+ "additionalProperties": false,
+ "required": ["format", "game", "system", "rom", "memory_regions", "sources"],
+ "properties": {
+  "format": {"const": "rammaps/1"},
+  "game": {"type": "string", "minLength": 1, "maxLength": 80},
+  "system": {"type": "string", "pattern": "^[a-z0-9]+$"},
+  "rom": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["sha1"],
+   "properties": {
+    "sha1": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[0-9a-f]{40}$"}},
+    "header_code": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9]{3,6}$"}
+   }
+  },
+  "memory_regions": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["name", "start", "size"],
+    "properties": {
+     "name": {"type": "string", "maxLength": 80},
+     "start": {"$ref": "#/$defs/hex"},
+     "size": {"$ref": "#/$defs/hex"}
+    }
+   }
+  },
+  "pointers": {"type": "object", "additionalProperties": {"$ref": "#/$defs/hex"}},
+  "values": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["type", "at"],
+    "properties": {
+     "type": {"$ref": "#/$defs/inttype"},
+     "at": {"$ref": "#/$defs/at"},
+     "count": {"type": "integer", "minimum": 1},
+     "status": {"$ref": "#/$defs/status"},
+     "how": {"$ref": "#/$defs/how"}
+    }
+   }
+  },
+  "structs": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["size", "fields"],
+    "properties": {
+     "size": {"$ref": "#/$defs/hex"},
+     "fields": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "object",
+       "additionalProperties": false,
+       "required": ["type", "off"],
+       "properties": {
+        "type": {"enum": ["u8", "s8", "u16", "s16", "u32", "s32", "u64", "s64", "str"]},
+        "off": {"$ref": "#/$defs/hex"},
+        "len": {"type": "integer", "minimum": 1},
+        "count": {"type": "integer", "minimum": 1},
+        "status": {"$ref": "#/$defs/status"},
+        "how": {"$ref": "#/$defs/how"}
+       },
+       "if": {"properties": {"type": {"const": "str"}}},
+       "then": {"required": ["len"]},
+       "else": {"not": {"required": ["len"]}}
+      }
+     }
+    }
+   }
+  },
+  "entities": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["struct", "at", "count"],
+    "properties": {
+     "struct": {"type": "string"},
+     "at": {"$ref": "#/$defs/at"},
+     "count": {"type": "integer", "minimum": 1},
+     "status": {"$ref": "#/$defs/status"},
+     "how": {"$ref": "#/$defs/how"}
+    }
+   }
+  },
+  "flags": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "base": {"$ref": "#/$defs/hex"},
+    "bits": {"type": "integer", "minimum": 1}
+   },
+   "dependentRequired": {"base": ["bits"], "bits": ["base"]}
+  },
+  "rom_tables": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["count", "stride"],
+    "properties": {
+     "addr": {"$ref": "#/$defs/hex"},
+     "table": {"$ref": "#/$defs/hex"},
+     "count": {"type": "integer", "minimum": 1},
+     "stride": {"type": "integer", "minimum": 1},
+     "status": {"$ref": "#/$defs/status"},
+     "how": {"$ref": "#/$defs/how"}
+    },
+    "oneOf": [{"required": ["addr"]}, {"required": ["table"]}]
+   }
+  },
+  "sources": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["method"],
+   "properties": {
+    "method": {"type": "string"},
+    "acknowledgements": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "use"],
+      "properties": {
+       "name": {"type": "string"},
+       "use": {"type": "string"},
+       "urls": {"type": "array", "items": {"type": "string", "pattern": "^https://"}}
+      }
+     }
+    }
+   }
+  }
+ },
+ "$defs": {
+  "hex": {"type": "string", "pattern": "^0x[0-9A-Fa-f]{1,16}$"},
+  "inttype": {"enum": ["u8", "s8", "u16", "s16", "u32", "s32", "u64", "s64"]},
+  "status": {"enum": ["confirmed", "unconfirmed"]},
+  "how": {"type": "array", "minItems": 1, "items": {"enum": ["capture", "diff", "perturbation", "code"]}},
+  "at": {
+   "oneOf": [
+    {"$ref": "#/$defs/hex"},
+    {
+     "type": "object",
+     "additionalProperties": false,
+     "required": ["ptr", "off"],
+     "properties": {"ptr": {"type": "string"}, "off": {"$ref": "#/$defs/hex"}}
+    }
+   ]
+  }
+ }
+}

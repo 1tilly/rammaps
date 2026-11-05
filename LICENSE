@@ -1,0 +1,8 @@
+This repository uses two licences, split by directory.
+
+  maps/, docs/, schema/   CC0 1.0 Universal (public domain dedication). See LICENSE-DATA.
+  scripts/, tests/        MIT. See LICENSE-CODE.
+
+Nothing here contains game code, game text, graphics, audio or save data.
+Game titles are trademarks of their owners and are used only to identify
+which game a map describes. This project is not affiliated with them.
