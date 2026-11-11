@@ -36,7 +36,7 @@ Only entries that were checked against our own emulator captures are included as
 
 - Golden Sun: The Lost Age (GS2, GBA)
 - Fire Emblem (GBA), for example The Sacred Stones (FE8)
-- Dragon Quest / Dragon Warrior II and III (NES); Dragon Warrior (USA) is in
+- Dragon Quest / Dragon Warrior II and III (NES); Dragon Warrior (USA) is already included
 - Pokemon Mystery Dungeon: Red Rescue Team (PMD)
 
 Planned means only that these are intended; nothing has been captured or verified for them. Contributions are welcome, see `CONTRIBUTING.md`.
@@ -83,4 +83,4 @@ Maintained by 1tilly. Built with Claude (Anthropic).
 Each map lists exactly what it took from whom in its `sources.acknowledgements`. Third-party notes are used as leads and re-checked on our own captures; no tables, text or code are copied. In short:
 
 - Golden Sun: [PascalPixel/alchemy](https://github.com/PascalPixel/alchemy), [Coaltergeist/goldensun-decomp](https://github.com/Coaltergeist/goldensun-decomp) and [kaptanultros/GoldenSun_GSTLA_StatDisplay](https://github.com/kaptanultros/GoldenSun_GSTLA_StatDisplay) suggested some offsets; the [Golden Sun Universe wiki](https://goldensunwiki.net/wiki/Zombie) (CC BY-SA 4.0) was a cross-check for one page.
-- Dragon Warrior (NES): the [RetroAchievements code notes for game 1471](https://retroachievements.org/game/1471) (TheMysticalOne, Gudra, OpheliaEnigma, SirVG) and [nmikstas/dragon-warrior-disassembly](https://github.com/nmikstas/dragon-warrior-disassembly) by Nicholas Mikstas pointed to addresses. That repository declares no licence, so only addresses (facts) were used, nothing was copied, and we will remove the credit-linked entries on request.
+- Dragon Warrior (NES): the [RetroAchievements code notes for game 1471](https://retroachievements.org/game/1471) (TheMysticalOne, Gudra, OpheliaEnigma, SirVG) and [nmikstas/dragon-warrior-disassembly](https://github.com/nmikstas/dragon-warrior-disassembly) by Nicholas Mikstas pointed to addresses. That repository declares no licence, so only addresses (facts) were used, nothing was copied, and we will remove the credit on request.
