@@ -1,0 +1,46 @@
+{
+  "format": "rammaps/1",
+  "game": "Dragon Warrior",
+  "system": "nes",
+  "rom": {
+    "sha1": [
+      "240e445ab95c3a5afbef63e9239eacc9f9fe1e19",
+      "1ecc63aaac50a9612eaa8b69143858c3e48dd0ae"
+    ]
+  },
+  "memory_regions": [
+    {"name": "cpu_ram", "start": "0x0000", "size": "0x800"}
+  ],
+  "values": {
+    "map_id": {"type": "u8", "at": "0x0045", "how": ["capture"]},
+    "player_x": {"type": "u8", "at": "0x008E", "how": ["capture"]},
+    "player_y": {"type": "u8", "at": "0x008F", "how": ["capture"]},
+    "gold": {"type": "u16", "at": "0x00BC", "how": ["capture"]},
+    "keys": {"type": "u8", "at": "0x00BF", "how": ["capture"]},
+    "xp": {"type": "u16", "at": "0x00BA", "how": ["capture", "perturbation"]},
+    "hp": {"type": "u8", "at": "0x00C5", "how": ["capture", "perturbation"]},
+    "mp": {"type": "u8", "at": "0x00C6", "how": ["perturbation"]},
+    "level": {"type": "u8", "at": "0x00C7", "how": ["capture", "perturbation"]},
+    "hp_max": {"type": "u8", "at": "0x00CA", "how": ["capture", "perturbation"]},
+    "mp_max": {"type": "u8", "at": "0x00CB", "how": ["capture", "perturbation"]},
+    "item_bytes": {"type": "u8", "at": "0x00C0", "count": 5, "how": ["perturbation"]},
+    "monster_id": {"type": "u8", "at": "0x00E0", "how": ["capture"]},
+    "monster_hp": {"type": "u8", "at": "0x00E2", "how": ["capture"]},
+    "menu_command": {"type": "u8", "at": "0x00D7", "how": ["capture"]},
+    "menu_cursor_col": {"type": "u8", "at": "0x00D8", "how": ["capture"]},
+    "menu_cursor_row": {"type": "u8", "at": "0x00D9", "how": ["capture"]},
+    "command_window_tile": {"type": "u8", "at": "0x044C", "how": ["capture"]},
+    "message_window_tile": {"type": "u8", "at": "0x0644", "how": ["capture"]},
+    "spell_flags": {"type": "u8", "at": "0x00CE", "how": ["perturbation"]}
+  },
+  "rom_tables": {
+    "level_xp": {"addr": "0xF36B", "count": 30, "stride": 2}
+  },
+  "sources": {
+    "method": "Found by the maintainers with FCEUmm RAM captures (scripted episodes, deterministic core) on a legitimately owned ROM (USA, Rev A / PRG1, iNES mapper 1; PRG0 is not covered). Second pass 2026-11-11: each former candidate was tested by perturbation, i.e. patching one byte of a saved state and replaying a script, with a stated expectation that could fail. xp: set to 6 and to 22, one slime kill later level rises to 2 and 3 exactly when xp reaches 7 and 23, and hp_max/mp_max follow (15 to 22, 22 to 24 and 0 to 5). hp: falls in fights (15 to 8), a herb raises it (5 to 15, capped at hp_max) and HEAL raises it (10 to 24, capped). mp: HEAL lowers it (5 to 1). item_bytes: 0xC0 is the herb count (a herb use takes it 3 to 2); 0xC1 to 0xC4 are the other inventory slots (two items per byte, a used item clears its slot in each of the four bytes). monster_id: 0 and 1 in the two kinds of fight seen (monster_hp 3 and 4); it holds a scratch value outside a fight, so read it only while monster_hp is above 0. monster_hp drops to 0 when the monster dies. menu_command: last chosen field command (1 status, 4 spell, 5 item, 7 take seen); cursor col and row follow the D-pad in the command window. command_window_tile is 0x64 while that window is drawn and 0xFF otherwise. spell_flags: with it at 0xFF the spell list opens and HEAL can be cast; at 0 the game refuses. Only that one effect was tested, not which bit is which spell. The XP table address came from a public disassembly as a lead; on our own ROM it reads as 30 strictly rising u16 values starting 0, 7, 23 and ending at 65535, and the level-ups above happen at its first two thresholds. map_id, player_x/y, gold, keys and message_window_tile come from the first capture pass: map_id changes only at stairs, doors and town entries, x/y change by one per step, gold rose 0 to 120 at a chest, 120 to 121 on a kill, fell 120 to 110 at a shop and 120 to 60 on game over, keys went 0 to 1 at the key chest and back at the door, and message_window_tile is 0x64 while the message window is drawn and 0xFF otherwise. The two ROM SHA-1s are the same Rev A ROM: the headerless (No-Intro) hash and the whole .nes file hash. CPU bus, internal RAM only, little-endian.",
+    "acknowledgements": [
+      {"name": "RetroAchievements Dragon Warrior (NES) code notes (game 1471; authors TheMysticalOne, Gudra, OpheliaEnigma, SirVG)", "use": "leads for the player block addresses and the map id list; each re-checked on our own captures; no tables or text copied", "urls": ["https://retroachievements.org/game/1471"]},
+      {"name": "nmikstas/dragon-warrior-disassembly (Nicholas Mikstas)", "use": "leads for the XP table location and the player block addresses (addresses only, none of its names or code); re-checked on our own ROM and captures. The repository declares no licence, so no code, tables, text or comments were copied, only addresses (facts). Will be removed on request.", "urls": ["https://github.com/nmikstas/dragon-warrior-disassembly"]}
+    ]
+  }
+}

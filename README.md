@@ -27,6 +27,7 @@ See `CONTRIBUTING.md` for the practical details.
 | Platform | Game | Region | File | Status | Entries / coverage | ROM SHA-1 |
 |---|---|---|---|---|---|---|
 | GBA | Golden Sun | USA | [golden-sun-usa.json](maps/gba/golden-sun-usa.json) | confirmed | 26 (12 values, 9 struct fields, 2 entities, 4096 flags, 2 ROM tables) | `5c469520` |
+| NES | Dragon Warrior | USA | [dragon-warrior-usa.json](maps/nes/dragon-warrior-usa.json) | confirmed | 21 (20 values, 0 struct fields, 0 entities, 1 ROM tables) | `240e445a` |
 <!-- END GAMES -->
 
 Only entries that were checked against our own emulator captures are included as confirmed; see `docs/schema.md` for what the status means. Maps are partial: they cover what a companion app needed, not whole games.
@@ -35,7 +36,7 @@ Only entries that were checked against our own emulator captures are included as
 
 - Golden Sun: The Lost Age (GS2, GBA)
 - Fire Emblem (GBA), for example The Sacred Stones (FE8)
-- Dragon Quest / Dragon Warrior (NES: Dragon Warrior first, then II and III)
+- Dragon Quest / Dragon Warrior II and III (NES); Dragon Warrior (USA) is already included
 - Pokemon Mystery Dungeon: Red Rescue Team (PMD)
 
 Planned means only that these are intended; nothing has been captured or verified for them. Contributions are welcome, see `CONTRIBUTING.md`.
@@ -76,3 +77,10 @@ Data (`maps/`, `docs/`, `schema/`): CC0 1.0, see `LICENSE-DATA`. Code (`scripts/
 ## Credits
 
 Maintained by 1tilly. Built with Claude (Anthropic).
+
+### Acknowledgements
+
+Each map lists exactly what it took from whom in its `sources.acknowledgements`. Third-party notes are used as leads and re-checked on our own captures; no tables, text or code are copied. In short:
+
+- Golden Sun: [PascalPixel/alchemy](https://github.com/PascalPixel/alchemy), [Coaltergeist/goldensun-decomp](https://github.com/Coaltergeist/goldensun-decomp) and [kaptanultros/GoldenSun_GSTLA_StatDisplay](https://github.com/kaptanultros/GoldenSun_GSTLA_StatDisplay) suggested some offsets; the [Golden Sun Universe wiki](https://goldensunwiki.net/wiki/Zombie) (CC BY-SA 4.0) was a cross-check for one page.
+- Dragon Warrior (NES): the [RetroAchievements code notes for game 1471](https://retroachievements.org/game/1471) (TheMysticalOne, Gudra, OpheliaEnigma, SirVG) and [nmikstas/dragon-warrior-disassembly](https://github.com/nmikstas/dragon-warrior-disassembly) by Nicholas Mikstas pointed to addresses. That repository declares no licence, so only addresses (facts) were used, nothing was copied, and we will remove the credit on request.
