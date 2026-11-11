@@ -27,6 +27,7 @@ See `CONTRIBUTING.md` for the practical details.
 | Platform | Game | Region | File | Status | Entries / coverage | ROM SHA-1 |
 |---|---|---|---|---|---|---|
 | GBA | Golden Sun | USA | [golden-sun-usa.json](maps/gba/golden-sun-usa.json) | confirmed | 26 (12 values, 9 struct fields, 2 entities, 4096 flags, 2 ROM tables) | `5c469520` |
+| NES | Dragon Warrior | USA | [dragon-warrior-usa.json](maps/nes/dragon-warrior-usa.json) | 13 unconfirmed | 20 (19 values, 0 struct fields, 0 entities, 1 ROM tables) | `240e445a` |
 <!-- END GAMES -->
 
 Only entries that were checked against our own emulator captures are included as confirmed; see `docs/schema.md` for what the status means. Maps are partial: they cover what a companion app needed, not whole games.
@@ -35,7 +36,7 @@ Only entries that were checked against our own emulator captures are included as
 
 - Golden Sun: The Lost Age (GS2, GBA)
 - Fire Emblem (GBA), for example The Sacred Stones (FE8)
-- Dragon Quest / Dragon Warrior (NES: Dragon Warrior first, then II and III)
+- Dragon Quest / Dragon Warrior II and III (NES); Dragon Warrior (USA) is in
 - Pokemon Mystery Dungeon: Red Rescue Team (PMD)
 
 Planned means only that these are intended; nothing has been captured or verified for them. Contributions are welcome, see `CONTRIBUTING.md`.

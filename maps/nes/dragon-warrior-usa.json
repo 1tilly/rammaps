@@ -1,0 +1,53 @@
+{
+  "format": "rammaps/1",
+  "game": "Dragon Warrior",
+  "system": "nes",
+  "rom": {
+    "sha1": [
+      "240e445ab95c3a5afbef63e9239eacc9f9fe1e19",
+      "1ecc63aaac50a9612eaa8b69143858c3e48dd0ae"
+    ]
+  },
+  "memory_regions": [
+    {"name": "cpu_ram", "start": "0x0000", "size": "0x800"}
+  ],
+  "values": {
+    "map_id": {"type": "u8", "at": "0x0045"},
+    "player_x": {"type": "u8", "at": "0x008E"},
+    "player_y": {"type": "u8", "at": "0x008F"},
+    "gold": {"type": "u16", "at": "0x00BC"},
+    "keys": {"type": "u8", "at": "0x00BF"},
+    "xp": {"type": "u16", "at": "0x00BA", "status": "unconfirmed"},
+    "hp": {"type": "u8", "at": "0x00C5", "status": "unconfirmed"},
+    "mp": {"type": "u8", "at": "0x00C6", "status": "unconfirmed"},
+    "level": {"type": "u8", "at": "0x00C7", "status": "unconfirmed"},
+    "hp_max": {"type": "u8", "at": "0x00CA", "status": "unconfirmed"},
+    "mp_max": {"type": "u8", "at": "0x00CB", "status": "unconfirmed"},
+    "item_bytes": {"type": "u8", "at": "0x00C0", "count": 5, "status": "unconfirmed"},
+    "monster_id_or_terrain": {"type": "u8", "at": "0x00E0", "status": "unconfirmed"},
+    "monster_hp": {"type": "u8", "at": "0x00E2", "status": "unconfirmed"},
+    "menu_command": {"type": "u8", "at": "0x00D7", "status": "unconfirmed"},
+    "menu_cursor_col": {"type": "u8", "at": "0x00D8", "status": "unconfirmed"},
+    "menu_cursor_row": {"type": "u8", "at": "0x00D9", "status": "unconfirmed"},
+    "command_window_tile": {"type": "u8", "at": "0x044C", "status": "unconfirmed"},
+    "message_window_tile": {"type": "u8", "at": "0x0644"}
+  },
+  "rom_tables": {
+    "level_xp": {"addr": "0xF36B", "count": 30, "stride": 2}
+  },
+  "sources": {
+    "method": "Values were found by the maintainers from FCEUmm RAM captures (scripted episodes) on a legitimately owned ROM (USA, Rev A / PRG1, iNES mapper 1; PRG0 is not covered). The XP table address came from a public disassembly as a lead; on our own ROM it reads as 30 strictly rising u16 values starting 0, 7, 23 and ending at 65535, which a wrong address would not. CPU bus, internal RAM only.",
+    "acknowledgements": [
+      {
+        "name": "RetroAchievements Dragon Warrior (NES) code notes",
+        "use": "leads for the player block addresses, re-checked on our own captures; no tables or text copied",
+        "urls": ["https://retroachievements.org/"]
+      },
+      {
+        "name": "nmikstas/dragon-warrior-disassembly",
+        "use": "lead for the XP table location (then checked on our own ROM) and the player block names; no code or tables copied",
+        "urls": ["https://github.com/nmikstas/dragon-warrior-disassembly"]
+      }
+    ]
+  }
+}
